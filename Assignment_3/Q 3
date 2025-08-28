@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<int> o;
+        for(int i=0; i<s.length(); i++){
+            char ch= s[i];
+            if(ch== '[' || ch=='{'|| ch=='('){
+                
+                o.push(ch);
+            }
+            else {
+                if(o.empty())
+                return false;
+                char c= o.top();
+                if((c== '['&& s[i]== ']')||(c=='{'&& s[i]=='}')|| (c=='('&& s[i]== ')'))
+                o.pop();
+                else return false;
+            }
+        }
+        if( o.empty())
+            return true;
+            else return false;
+    }
+};
+int main{
+    Solution s;
+string test="{}()";
+    cout<<s.isValid(test);
+}
