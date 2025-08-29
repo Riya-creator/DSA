@@ -1,86 +1,34 @@
-// push the required string
-include <iostream>
+#include <iostream>
 using namespace std;
-
-class stack {
-    int len, top=-1 ;
-    int a[10];
+class stack{
     public:
-    stack(int n){
-        len =n;
+    char  *a;
+    int top=-1, len;
+    
+    stack(int len) : a(new char[len]), len(len){
     }
-    void push(){
-        int n;
-        cout<<"Enter the value to puush in stack:";
-        cin>>n;
-        if(top>=9){
-            cout<<"stack overflowed";
-            return;
+    void reverse(){
+        top=-1;
+        cout<<"enter the string to be reversed";
+        for(int i=0; i<len; i++){
+            top=i;
+            cin(a[i]);
         }
-        else {
-            top++;
-            a[top]= n;
+        cout<<"Reversed string is :";
+        for(int i=top; i>-1; i--){
+            cout<<a[i];
         }
-    }
-    void pop(){
-        cout<<"the topmost value poped from the stakc is: "<<a[top];
-        if( top>0){
-            top--;
-        }
-        else cout<<"stack is already empty\n";
-    }
-    void isEmpty(){
-        if(top==-1)
-        cout<<"stack is empty ";
-        else cout<<"statck contain some elements\n";
-    }
-    void isFull()
-    {
-        if( top==len-1)
-        cout<<"stack is full";
-        else cout<<"stack can gain some more elements\n";
-    }
-    void display(){
-        for( int i=top; i>=0; i--){
-            cout<<a[i]<<"   ";
-        }
-    }
-    void peek(){
-        cout<<"the topmost element is:"<<a[top];
     }
 };
 int main()
 {
-    int n, choice;
-    cout<<"enter the length of the stack:";
-    cin>>n;
-    stack a(n);
+    int len;
     while(1){
-    cout<<"\n choose the operation u need to use on ur stack from menu:\n 1. push\n 2. pop\n 3. IsEmpty\n 4. isFull\n 5. display \n 6. peek\n 7. exit\n";
-    cin>>choice;
-    if( choice ==7)
-    break;
-    switch(choice){
-        case 1:
-        a.push();
-        break;
-        case 2:
-        a.pop();
-        break;
-        case 3:
-        a.isEmpty();
-        break;
-        case 4:
-        a.isFull();
-        break;
-        case 5:
-        a.display();
-        break;
-        case 6:
-        a.peek();
-        break;
-        defalut :
-        cout<<"Enter the valid option...";
-    }
+        cout<<"\nEnter the Length of the string to reverse";
+        cin>>len;
+        if(len==0)
+            return 0;
+        stack s(len);
+        s.reverse();
     }
 }
