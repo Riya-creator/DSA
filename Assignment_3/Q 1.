@@ -1,12 +1,13 @@
-include <iostream>
+#include <iostream>
 using namespace std;
 
 class stack {
     int len, top=-1 ;
-    int a[10];
+    int *a;
     public:
     stack(int n){
         len =n;
+        a= new int[len];
     }
     void push(){
         int n;
@@ -23,7 +24,7 @@ class stack {
     }
     void pop(){
         cout<<"the topmost value poped from the stakc is: "<<a[top];
-        if( top>0){
+        if( top>=0){
             top--;
         }
         else cout<<"stack is already empty\n";
@@ -35,7 +36,7 @@ class stack {
     }
     void isFull()
     {
-        if( top==len-1)
+        if( top==len-1 )
         cout<<"stack is full";
         else cout<<"stack can gain some more elements\n";
     }
