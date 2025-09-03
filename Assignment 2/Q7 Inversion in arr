@@ -1,13 +1,12 @@
-//  bubble sort ques2
 #include <iostream>
 using namespace std;
-void bubsort(int * a, int n){
+void findInversion(int * a, int n){
     int flag=0;
     for( int i=0; i<n; i++){
         flag= 0;
         for( int j=0; j<n-1-i;j++){
             if(a[j]> a[j+1]){
-                cout<<"\n Got to find the inversion here:"<<a[j+1]<<", "<<a[j]<<"\n";
+                cout<<"\n inversion :"<<a[j+1]<<", "<<a[j]<<"\n";
                 flag=1;
                 int temp= a[j];
                 a[j]= a[j+1];
@@ -15,7 +14,7 @@ void bubsort(int * a, int n){
             }
         }
             if( flag== 0){
-                cout<<"Kam ho gya";
+                cout<<"No more inversions left..";
                 break;
             }
     }
@@ -30,5 +29,5 @@ int main()
 {
     int a[7]={64, 34, 25, 12, 22, 11, 90};
     show(a,7);
-    bubsort(a, 7);
+    findInversion(a, 7);
 }
