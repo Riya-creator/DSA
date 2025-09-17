@@ -1,0 +1,105 @@
+#include <iostream>
+using namespace std;
+class queues{
+    int f=-1, r=-1, len=0;
+    int * a;
+    public:
+    queues( int n){
+        a= new int [n];
+        len=n;
+    }
+    void enqueue(){
+        int m;
+        if( f==-1 && r==-1){
+            f++;
+            r++;
+            cout<<"Enter the value of insert \n";
+            cin>>m;
+        }
+        else if( r<len-1){
+            r++;
+            cout<<"Enter the value of insert \n";
+            cin>>m;
+        }
+        else {
+            cout<<"Ur queue is full this time no insertion is possible in this....\n";
+            return;
+        }
+        a[r]= m;
+    }
+    void dequeue( ){
+        if( !isEmpty()){
+            r--;
+        }
+        
+    }
+    bool isEmpty(){
+        if ( f==-1 || f>r)
+        {
+            cout<<"the queue is empty here \n";
+            return true; 
+        }
+        return false;
+    }
+    bool isFull(){
+        if( r==len-1){
+            return true;
+        }
+        return false;
+    }
+    void display(){
+        if( isEmpty())
+        return;
+        for( int i=f;  i<=r; i++){
+            cout<<a[i]<<" ";
+        }
+        cout<<endl;
+    }
+    void peek(){
+        if(isEmpty())
+        {
+            return;
+        }
+        if(r>-1)
+        cout<<a[r];
+        
+    }
+};
+int main()
+{
+    int n, choice;
+    cout<<"enter the max number of the elements u need to store in the queue: ";
+    cin>>n;
+    queues Q(n);
+    while(1){
+    cout<<"choose from this menu to implement the operation u wanna on this queue\n1.Enqueue\n2.Dequeue\n 3.Empty check\n 4. full check\n 5. Display \n 6.Peek\n 7.Exit\n";
+    cin>>choice;
+    switch(choice){
+        case 1:
+        Q.enqueue();
+        break;
+        case 2:
+        Q.dequeue();
+        break;
+        case 3:
+        if(!Q.isEmpty()){
+            cout<<"It contians some numbers\n";
+        }
+        break;
+        case 4:
+        if(Q.isFull())
+        cout<<"Full ....!\n";
+        else cout<<"Need more elements\n";
+        break;
+        case 5:
+        Q.display();
+        break;
+        case 6:
+        Q.peek();
+        break;
+        case 7:
+        return 0;
+    }
+    }
+    return 0;
+}
