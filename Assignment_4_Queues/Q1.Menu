@@ -27,12 +27,16 @@ class queues{
         }
         a[r]= m;
     }
-    void dequeue( ){
-        if( !isEmpty()){
-            r--;
+    void dequeue() {
+        if (isEmpty()) {
+            return;
         }
-        
+        f++;
+        if (f > r) { // reset when queue becomes empty
+            f = r = -1;
+        }
     }
+
     bool isEmpty(){
         if ( f==-1 || f>r)
         {
@@ -42,7 +46,7 @@ class queues{
         return false;
     }
     bool isFull(){
-        if( r==len-1){
+        if( r==len-1 && f==0){
             return true;
         }
         return false;
@@ -60,8 +64,7 @@ class queues{
         {
             return;
         }
-        if(r>-1)
-        cout<<a[r];
+        cout<<a[f];
         
     }
 };
