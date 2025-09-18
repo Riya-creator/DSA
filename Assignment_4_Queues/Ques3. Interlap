@@ -1,0 +1,98 @@
+#include<iostream>
+using namespace std;
+
+class queues{
+    int *a, f=-1, r=-1, len;
+    public:
+    queues( int n){
+        a= new int [n];
+        len=n;
+    }
+    void enqueue(int m){
+
+        if( f==-1 && r==-1){
+            f++;
+            r++;
+            
+        }
+        else if( r<len-1){
+            r++;
+            
+        }
+        else {
+            cout<<"Ur queue is full this time no insertion is possible in this....\n";
+            return;
+        }
+        a[r]= m;
+    }
+    void dequeue() {
+        if (isEmpty()) {
+            return;
+        }
+        f++;
+        if (f > r) { // reset when queue becomes empty
+            f = r = -1;
+        }
+    }
+
+    bool isEmpty(){
+        if ( f==-1 || f>r)
+        {
+            cout<<"the queue is empty here \n";
+            return true; 
+        }
+        return false;
+    }
+    bool isFull(){
+        if( r==len-1 && f==0){
+            return true;
+        }
+        return false;
+    }
+    void display(){
+        if( isEmpty())
+        return;
+        for( int i=f;  i<=r; i++){
+            cout<<a[i]<<" ";
+        }
+        cout<<endl;
+    }
+    int peek(){
+        if(isEmpty())
+        {
+            return -1;
+        }
+        return a[f];
+        
+    }
+    queues inter(queues &q,  int n){
+        queues ans(n), sup(n/2 +n%2);
+        for( int i=0; i<=(n/2); i++){
+            sup.enqueue(q.peek());
+            q.dequeue();
+        }
+        for( int i=0; i<n/2;i++){
+            ans.enqueue(sup.peek());
+            sup.dequeue();
+            ans.enqueue(q.peek());
+            q.dequeue();
+        }
+        if(n%2){
+            ans.enqueue(sup.peek());
+        }
+        return ans;
+    }
+};
+int main(){
+    int n;
+    cout<<"Enter the number of element of queue";
+    cin>>n;
+    queues q(n);
+    for(int i=0; i<n; i++){
+        int m;
+        cin>>m;
+        q.enqueue(m);
+    }
+    queues ans= q.inter(q, n);
+    ans.display();
+}
