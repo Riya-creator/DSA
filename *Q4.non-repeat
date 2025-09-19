@@ -1,0 +1,96 @@
+#include<iostream>
+using namespace std;
+
+class queues{
+    int  f=-1, r=-1, len;
+    char *a;
+    public:
+    int *b= new int[26];
+    queues( int n){
+        a= new char [n];
+        len=n;
+    }
+    void enqueue(char m){
+        if( f==-1 && r==-1){
+            f++;
+            r++;
+            
+        }
+        else if( r<len-1){
+            r++;
+            
+        }
+        else {
+            cout<<"Ur queue is full this time no insertion is possible in this....\n";
+            return;
+        }
+        a[r]= m;
+        b[m-'a']++;
+    }
+    void dequeue() {
+        if (isEmpty()) {
+            return;
+        }
+        f++;
+        if (f > r) { // reset when queue becomes empty
+            f = r = -1;
+        }
+    }
+
+    bool isEmpty(){
+        if ( f==-1 || f>r)
+        {
+            return true; 
+        }
+        return false;
+    }
+    bool isFull(){
+        if( r==len-1 && f==0){
+            return true;
+        }
+        return false;
+    }
+    void display(){
+        if( isEmpty())
+        return;
+        for( int i=f;  i<=r; i++){
+            cout<<a[i]<<" ";
+        }
+        cout<<endl;
+    }
+    char peek(){
+        if(isEmpty())
+        {
+            return '\0';
+        }
+        return a[f];
+    }
+    string non_repeat(){
+        string ans;
+        for( int i=0; i<len; i++){
+            char m;
+            cout<<"Enter the "<<i<<" element if the string";
+            cin>>m;
+            enqueue(m);
+            while(!isEmpty() && (b[peek()-'a']>1)){
+                dequeue();
+            }
+            // ans.push_back(" ");
+            ans+=" ";
+            if(!isEmpty()) 
+            ans.push_back(peek());
+            else ans+="-1";
+        }
+        return ans;
+    }
+};
+int main(){ 
+    int n;
+    cout<<"Enter the len of string";
+    cin>>n;
+    queues qu(n);
+    string ans= qu.non_repeat();
+    cout<<"\nTher result of the string is: \n"<<ans;
+}
+//oooooooooooooooooooooooooooooooooooooooooooooooo**********************************************
+//don't take bool here as then it may not differntiate at a point if it is non repeating or not 
