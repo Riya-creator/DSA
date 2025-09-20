@@ -1,0 +1,151 @@
+#include <iostream>
+using namespace std;
+class queue{
+    int *a, f=-1, r=-1,len;
+    public:
+    queue(int n){
+        a= new int [n];
+        len=n;
+    }
+    bool isEmpty(){
+        if(f==-1 &&r==-1)
+        return true;
+        return false;
+    }
+    bool isFull(){
+        if((r+1)%len==f )
+        return true;
+        return false;
+    }
+    void enqueue(int n){
+        if(isFull()){
+            cout<<"\nNo Space the insert the value\n";
+            return ;
+        }
+        if (f == -1 && r == -1)
+
+        {
+            f++;r++;
+        }
+        else r=(r+1)%len;
+        a[r]=n;
+    }
+    void dequeue(){
+        if(isEmpty()){
+            cout<<"\nIt doesn't contain any elements...\n";
+            return;
+        }
+        if(f==r){
+            f=-1;r=-1;
+        }
+        else f=(f+1)%len;
+        
+    }
+    void display(){
+        if(isEmpty())
+        {
+            cout<<"\nIt is empty nothing to diplay\n";
+            return;
+        }
+        int i=f;
+        do{
+            cout<<a[i]<<" ";
+            i= (i+1)%len;
+        }while(i!=((r+1)%len));
+        cout<<endl;
+    }
+    int peek(){
+        if(isEmpty()){
+            cout<<"No element in this";
+            return 0;
+        }
+        return a[f];
+    }
+    ~queue(){
+    delete[] a;
+}
+};
+class stack{
+    queue *q;
+    int len, curr;
+    public:
+    stack(int n){
+        q=new queue (n);
+        len=n;curr=0;
+    }
+    void push(){
+        int n;
+        if(q->isFull()){
+            cout<<"It is full no space..!";
+            return;
+        }
+        cout<<"Enter the value to be instered";
+        cin>>n;
+        q->enqueue(n);
+        for(int i=0;i<curr;i++){
+            int num=q->peek();
+            q->dequeue();
+            q->enqueue(num);
+        }
+        curr++;
+    }
+    void pop(){
+        q->dequeue();
+    }
+    int top(){
+        return q->peek();
+    }
+    void display(){
+        q->display();
+    }
+    bool empty(){
+        return q->isEmpty();
+    }
+    bool full(){
+        return q->isFull();
+    }
+    ~stack(){
+        delete []q;
+    }
+};
+int main()
+{
+    int n, choice;
+    cout<<"enter the max number of the elements u need to store in the stack: ";
+    cin>>n;
+    stack s(n);
+    while(1){
+    cout<<"choose from this menu to implement the operation u wanna on this stack\n1.Enqueue\n2.Dequeue\n 3.Empty check\n 4. full check\n 5. Display \n 6.Peek\n 7.Exit\n";
+    cin>>choice;
+    switch(choice){
+        case 1:
+        s.push();
+        break;
+        case 2:
+        s.pop();
+        break;
+        case 3:
+        if(!s.empty()){
+            cout<<"It contians some numbers\n";
+        }
+        else cout<<"It is Empty!!..\n";
+        break;
+        case 4:
+        if(s.full())
+        cout<<"Full ....!\n";
+        else cout<<"Need more elements\n";
+        break;
+        case 5:
+        s.display();
+        break;
+        case 6:
+        cout<<"\nThe topmost element in this is:"<<s.top()<<endl;
+        break;
+        case 7:
+        return 0;
+        default:
+        cout<<"\nNot valid choise!!\n";
+    }
+    }
+    return 0;
+}
