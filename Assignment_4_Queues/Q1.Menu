@@ -67,6 +67,9 @@ class queues{
         cout<<a[f];
         
     }
+    ~queues(){
+        delete []a;
+}
 };
 int main()
 {
