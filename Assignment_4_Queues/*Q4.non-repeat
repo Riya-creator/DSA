@@ -83,6 +83,9 @@ class queues{
         }
         return ans;
     }
+    ~queues(){
+        delete[] a;
+}
 };
 int main(){ 
     int n;
