@@ -58,6 +58,9 @@ class Circlular{
         }
         else cout<<"\n"<<a[f]<<endl;
     }
+    ~Circlular(){
+        delete [] a;
+}
 };
 int main()
 {
