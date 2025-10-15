@@ -1,0 +1,158 @@
+#include <iostream>
+using namespace std;
+
+class node {
+public:
+    int val;
+    node* next;
+    node* prev;
+
+    node(int v) : val(v), next(nullptr), prev(nullptr) {}
+};
+
+class dll {
+    node* head;
+    node* tail;
+
+public:
+    dll() {
+        head = tail = nullptr;
+    }
+
+    void insertst(int val) {
+        node* nn = new node(val);
+        if (!head) {
+            head = tail = nn;
+            head->next = head;
+            head->prev = head;
+            return;
+        }
+        nn->next = head;
+        nn->prev = tail;
+        tail->next = nn;
+        head->prev = nn;
+        head = nn;
+    }
+
+    void end(int val) {
+        node* nn = new node(val);
+        if (!head) {
+            head = tail = nn;
+            head->next = head;
+            head->prev = head;
+            return;
+        }
+        nn->prev = tail;
+        nn->next = head;
+        tail->next = nn;
+        head->prev = nn;
+        tail = nn;
+    }
+
+    void insertionafter(int val, int af) {
+        if (!head) return;
+        node* ptr = head;
+        do {
+            if (ptr->val == af) {
+                node* nn = new node(val);
+                nn->next = ptr->next;
+                nn->prev = ptr;
+                ptr->next->prev = nn;
+                ptr->next = nn;
+                if (ptr == tail) tail = nn;
+                return;
+            }
+            ptr = ptr->next;
+        } while (ptr != head);
+    }
+
+    void insertionbef(int val, int bef) {
+        if (!head) return;
+        node* ptr = head;
+        do {
+            if (ptr->val == bef) {
+                node* nn = new node(val);
+                nn->next = ptr;
+                nn->prev = ptr->prev;
+                ptr->prev->next = nn;
+                ptr->prev = nn;
+                if (ptr == head) head = nn;
+                return;
+            }
+            ptr = ptr->next;
+        } while (ptr != head);
+    }
+
+    void deletion(int value) {
+        if (!head) return;
+
+        node* ptr = head;
+        do {
+            if (ptr->val == value) {
+                if (ptr == head && ptr == tail) {
+                    delete ptr;
+                    head = tail = nullptr;
+                    return;
+                }
+                ptr->prev->next = ptr->next;
+                ptr->next->prev = ptr->prev;
+
+                if (ptr == head) head = ptr->next;
+                if (ptr == tail) tail = ptr->prev;
+
+                delete ptr;
+                return;
+            }
+            ptr = ptr->next;
+        } while (ptr != head);
+    }
+
+    void search(int value) {
+        if (!head) {
+            cout << "List is empty.\n";
+            return;
+        }
+
+        node* ptr = head;
+        int idx = 0;
+        do {
+            if (ptr->val == value) {
+                cout << "Value " << value << " found at index " << idx << endl;
+                return;
+            }
+            ptr = ptr->next;
+            idx++;
+        } while (ptr != head);
+        cout << "Value " << value << " not found.\n";
+    }
+
+    void show() {
+        if (!head) {
+            cout << "List is empty.\n";
+            return;
+        }
+
+        node* ptr = head;
+        cout << "Circular DLL: ";
+        do {
+            cout << ptr->val << " ";
+            ptr = ptr->next;
+        } while (ptr != head);
+        cout << endl;
+    }
+};
+
+int main() {
+    dll dl;
+    dl.insertst(10);
+    dl.insertst(20);
+    dl.end(30);
+    dl.insertionafter(25, 20);
+    dl.insertionbef(5, 10);
+
+    dl.show();
+    dl.deletion(25);
+    dl.show();
+    dl.search(30);
+    dl.search(100);
+}
