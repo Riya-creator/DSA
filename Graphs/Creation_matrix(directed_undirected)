@@ -1,0 +1,128 @@
+#include <iostream>
+using namespace std;
+class graph{
+    public:
+    int v;
+    graph *next;
+    graph( int n){
+        v= n;
+    }
+    void create_un_mat(){
+        int a[v][v],  num, sum =0;
+        for( int i=0; i<v; i++){
+            for( int j=0; j<v; j++){
+                cout<<"Enter route exist from "<<i+1<<" to "<<j+1<<" :";
+                cin>>a[i][j];
+            }
+        }
+        
+        //show 
+        cout<<"   ";
+        for( int i=1; i<v+1; i++)
+            cout<<i<<"  ";
+            cout<<"\n";
+        for( int i=0; i<v; i++){
+            cout<<i+1<<"  ";
+            for( int j=0; j<v; j++){
+                cout<<a[i][j]<<"  ";
+            }
+            cout<<endl;
+        }
+        //number of in- degree
+        while(1){
+            cout<<"\nEnter the vertex for which wanna know abt the in-degree";
+            cin>>num;
+            int c;
+            for( int i=0; i<v; i++){
+                sum+= a[i][num-1];
+            }
+            cout<<"In degree of vertex "<<num<<" is :"<<sum<<endl;
+            cout<<"\nDo u wanna Continue to ask for in degree:";
+            cin>>c;
+            if( !c) break;
+        }
+        while(1){
+            //out degree
+            int c;
+            cout<<"Enter the vertex to check for the out degree of :";
+            cin>>num;
+            sum=0;
+            for( int i=0 ;i<v; i++){
+                sum += a[num-1][i];
+            }
+            cout<<"Out degree of vertex "<<num<<" is :"<<sum<<endl;
+            cout<<"\nDo u wanna Continue to ask for out degree:";
+            cin>>c;
+            if( !c) break;
+        }
+    }
+    void create_di_mat(){
+        int a [v][v],x, sum=0, num, c;
+        for( int i=0; i<v; i++){
+            for( int j=0; j<=i; j++){
+                cout<<"Enter route exist between "<<i+1<<" and "<<j+1<<" :";
+                cin>>x;
+                a[i][j]= a[j][i] = x;
+            }
+        }
+        
+        //show 
+        cout<<"   ";
+        for( int i=1; i<v+1; i++)
+            cout<<i<<"  ";
+            cout<<"\n";
+        for( int i=0; i<v; i++){
+            cout<<i+1<<"  ";
+            for( int j=0; j<v; j++){
+                cout<<a[i][j]<<"  ";
+            }
+            cout<<endl;
+        }
+        //number of in- degree
+        while(1){
+            cout<<"\nEnter the vertex for which wanna know abt the in-degree";
+            cin>>num;
+            for( int i=0; i<v; i++){
+                sum+= a[i][num-1];
+            }
+            cout<<"In degree of vertex "<<num<<" is :"<<sum<<endl;
+            cout<<"\nDo u wanna Continue to ask for in degree:";
+            cin>>c;
+            if( !c) break;
+        }
+        //out degree
+        while(1){
+            cout<<"Enter the vertex to check for the out degree of :";
+            cin>>num;
+            sum=0;
+            for( int i=0 ;i<v; i++){
+                sum += a[num-1][i];
+            }
+            cout<<"Out degree of vertex "<<num<<" is :"<<sum<<endl;
+            cout<<"\nDo u wanna Continue to ask for out degree:";
+                cin>>c;
+                if( !c) break;
+        }
+    }
+};
+int main()
+{
+    int n;
+    cout<<"Enter the number of the vertices in the graph:";
+    cin>>n;
+    graph g (n);
+    int choose ;
+    while(1){
+        cout<<"\nEnter 1 directed n 2 for undirected graphs or anything else for ending :";
+        cin>>choose;
+        if (choose!=1 && choose!=2) break;        switch(choose){
+        case 1:
+            g.create_di_mat();
+            break;
+        case 2:
+            g.create_un_mat();
+            break;
+        }
+    }
+        return 0;
+}
