@@ -1,0 +1,136 @@
+#include <iostream>
+#include<stack>
+#include<vector>
+#include<queue>
+using namespace std;
+class graph{
+    public:
+    int v;
+    graph *next;
+    graph( int n){
+        v= n;
+    }
+    void create_un_mat(){
+        int a[v][v],  num, sum =0;
+        for( int i=0; i<v; i++){
+            for( int j=0; j<v; j++){
+                cout<<"Enter route exist from "<<i+1<<" to "<<j+1<<" :";
+                cin>>a[i][j];
+            }
+        }
+        int ch;
+        stack<int> s;
+        vector<bool> visit(v, false);
+        cout<<"\n DFS traversa of graph\n";
+        for(int i=0;i< v;i++){
+            if(visit[i]) continue;
+            s.push(i);
+            
+            while(!s.empty()){
+                int temp= s.top();
+                s.pop();
+                if(visit[temp]) continue;
+                cout<<temp+1<<" -> ";
+                visit[temp]=true;
+                for(int i=0;i<v; i++){
+                    if( a[temp][i]==1 && visit[i]==false) s.push(i);
+                }
+            }
+        }
+        cout<<"\b\b\b    ";
+        
+        cout<<"\n Time for bfs traversal:\n";
+        vector<bool> visit2(v, false);
+        queue<int>q;
+        for(int i=0; i<v;i++){
+            if(visit2[i]) continue;
+            q.push(i);
+            visit2[i] = true; 
+            while(!q.empty()){
+                int so= q.front();
+                q.pop();
+                cout<<so+1<<" -> ";
+                for(int i=0;i<v ;i++){
+                    if( a[so][i]==1 && visit2[i]==false){
+                        q.push(i);
+                        visit2[i]=true;
+                    } 
+                }
+            }
+        }
+        cout<<"\b\b\b     ";
+    }
+    void create_di_mat(){
+        int a [v][v],x, sum=0, num, c;
+        for( int i=0; i<v; i++){
+            for( int j=0; j<=i; j++){
+                cout<<"Enter route exist between "<<i+1<<" and "<<j+1<<" :";
+                cin>>x;
+                a[i][j]= a[j][i] = x;
+            }
+        }
+        int ch;
+        stack<int> s;
+        vector<bool> visit(v, false);
+        cout<<"\n DFS traversa of graph\n";
+        for(int i=0;i< v;i++){
+            if(visit[i]) continue;
+            s.push(i);
+            
+            while(!s.empty()){
+                int temp= s.top();
+                s.pop();
+                if(visit[temp]) continue;
+                cout<<temp+1<<" -> ";
+                visit[temp]=true;
+                for(int i=0;i<v; i++){
+                    if( a[temp][i]==1 && visit[i]==false) s.push(i);
+                }
+            }
+        }
+        cout<<"\b\b\b    ";
+        
+        cout<<"\n Time for bfs traversal:\n";
+        vector<bool> visit2(v, false);
+        queue<int>q;
+        for(int i=0; i<v;i++){
+            if(visit2[i]) continue;
+            q.push(i);
+            visit2[i] = true; 
+            while(!q.empty()){
+                int so= q.front();
+                q.pop();
+                cout<<so+1<<" -> ";
+                for(int i=0;i<v ;i++){
+                    if( a[so][i]==1 && visit2[i]==false){
+                        q.push(i);
+                        visit2[i]=true;
+                    } 
+                }
+            }
+        }
+        cout<<"\b\b\b     ";
+    }
+};
+int main()
+{
+    int n;
+    cout<<"Enter the number of the vertices in the graph:";
+    cin>>n;
+    graph g (n);
+    int choose ;
+    while(1){
+        cout<<"\nEnter 1 directed n 2 for undirected graphs or anything else for ending :";
+        cin>>choose;
+        if (choose!=1 && choose!=2) break;      
+        switch(choose){
+        case 1:
+            g.create_di_mat();
+            break;
+        case 2:
+            g.create_un_mat();
+            break;
+        }
+    }
+        return 0;
+}
