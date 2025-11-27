@@ -1,0 +1,86 @@
+#include<iostream>
+#include<climits>
+using namespace std;
+class Node {
+    public:
+    int node, size;
+    Node * next =NULL;
+    Node( int v, int s): node(v), size(s){}
+};
+class graph{
+    public:
+    int v;
+    Node ** g;
+    bool * visit;
+    int * dis;
+    graph(int v): v(v){
+        g= new Node* [v];
+        visit= new bool[v];
+        dis= new int [v];
+        for( int i=0; i<v; i++){
+            visit[i]=false;
+            dis[i]= INT_MAX;
+            g[i] = NULL;
+        }
+    }
+    void dir(){
+        cout<<"Enter edges for the directed graph\n";
+        int n, n1, n2, n3;
+        cin>>n;
+        cout<<"\n taking edges\n";
+        for( int i=0; i<n; i++){
+            cin>>n1>>n2>>n3;
+            Node *nn= new Node(n2, n3);
+            nn->next =g[n1];
+            g[n1] = nn;
+        }
+    }
+    
+    int findmin(){
+        int minv= INT_MAX, minn=-1;
+        
+        for( int i=0; i<v; i++){
+            if(visit[i] == false && dis[i]<minv){
+                minv= dis[i];
+                minn= i;
+            }
+        }
+        return minn;
+    }
+    
+    void dijpath(int src){
+        dis[src]=0;
+        for( int i=0; i< v; i++){
+            int n= findmin();
+            if( n==-1) continue;
+            visit[n]=true;
+            Node * temp= g[n];
+            while( temp){
+                int d= temp->size, no= temp->node;
+                if(visit[no]==false){
+                    if( d+dis[n] <dis[no]){
+                        dis[no] = d+dis[n];
+                    }
+                }
+                temp= temp->next;
+            }
+        }
+        cout<<"The pattern fo the min distance is as follows:\n";
+        for( int i=0; i< v; i++){
+            cout<<"distance of "<<i<<" is: "<<dis[i]<<endl;
+        }
+    }
+    
+    
+};
+int main(){
+    graph d(4);
+    //node vary from 0 to 3 
+    d.dir();
+    // bool ar[4]= {false};
+    // for (int i = 0; i < 4; i++) {
+    //     if (!ar[i]) 
+    //         d.dfs(ar, i);
+    // }
+    d.dijpath(0);
+}
