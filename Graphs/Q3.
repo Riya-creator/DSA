@@ -1,0 +1,48 @@
+class disjoin_set{
+    vector<int> size, parent;
+    public:
+    disjoin_set( int n){
+        size.resize(n+1);
+        parent.resize(n+1);
+        for( int i=0; i< n+1; i++){
+            size[i]=1;
+            parent[i]= i;
+        }
+    }
+    int fparent(int n ){
+        if( n== parent[n]) return n;
+        return parent[n] = fparent( parent[n]);
+    }
+    
+    void union_by_size(int n, int m){
+        int un= fparent(n), um = fparent(m);
+        if( um == un ) return ;
+        if( size[um] > size[un]){
+            size[um] +=size[un];
+            parent[un] = um;
+        }
+        else {
+            size[un] += size[um];
+            parent[um]= un;
+        }
+    }
+};
+class Solution {
+  public:
+    int kruskalsMST(int V, vector<vector<int>> &edges) {
+        priority_queue<tuple<int, int,int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>>p;
+        for( int i=0; i< edges.size(); i++)
+        p.push({edges[i][2], edges[i][1], edges[i][0]});
+        int mst=0;
+        disjoin_set d(V);
+        while( !p.empty()){
+            auto [w,n, o]= p.top();
+            p.pop();
+            if (d.fparent(n) == d.fparent(o)) continue;
+
+            mst+= w;
+            d.union_by_size(n, o);
+        }
+        return mst;
+    }
+};
