@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+class Node {
+    public:
+    int val, count =1;
+    Node * next;
+    Node( int v): val(v){
+    }
+    
+};
+class hasht{
+    public:
+    Node ** ar;
+    int len;
+    hasht(int v){
+        ar= new Node* [v];
+        len= v;
+        for( int i=0; i< v; i++) ar[i] = NULL;
+    }
+    bool duplicate(int v){
+        int hc= (v)%len;
+        Node * temp = ar[hc];
+        while( temp){
+            if( temp->val ==v )
+            {
+                temp->count ++;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    void add(int v){
+        if( duplicate(v)){
+            cout<<"\nDuplicate created..\n";
+            return; 
+        } 
+        int hcode= (v)%len;
+        Node * nn = new Node (v);
+        nn->next=ar[hcode];
+        ar[hcode]= nn;
+    }
+    
+    void display(){
+        for( int i=0 ;i <len; i++){
+            cout<<"\n index "<<i<<" : \n";
+            for( Node * nn= ar[i]; nn!= NULL; nn= nn->next)
+            cout<<endl<<"Node value:"<<nn->val<<" fre: "<<nn->count<<" ;\n";
+        }
+    }
+};
+int main()
+{
+    hasht h(10);
+    h.add(2);
+    h.add(4);
+    h.add(5);
+    h.add(13);
+    h.display();
+}
