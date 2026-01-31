@@ -1,4 +1,4 @@
-#**Minimum Platforms Required for Trains**
+# **Minimum Platforms Required for Trains**
 
 Problem Type: Greedy, Interval Scheduling, Sweep Line
 Difficulty: Medium
@@ -26,7 +26,7 @@ Difficulty: Medium
 
 
 
-##**🧠 Approach 2 — Priority Queue (Min Heap)**
+## **🧠 Approach 2 — Priority Queue (Min Heap)**
 -Pair (arrival, departure) times.
 -Sort by arrival.
 -Use a min-heap storing departure times of currently active trains.
@@ -40,7 +40,7 @@ Difficulty: Medium
 📄 Code
 👉[Min_Heap_Solution](Priority_Queue(Min_Heap).cpp)
 
-#**🤔 When to Pick Which?**
+# **🤔 When to Pick Which?**
 -🔥 Two-Pointer Approach when:
 You only need the maximum overlap count.
 You want a memory-optimized solution.
@@ -51,7 +51,7 @@ You want to extend the problem to:
 simulation-style scheduling.
 You want a generalized pattern for problems like meeting rooms or runways.
 
-#**📝 Notes to Self**
+# **📝 Notes to Self**
 -Sweep line is the cleanest for counting overlaps.
 -Heap version is more flexible for extensions.
 -Always track peak concurrent intervals.
