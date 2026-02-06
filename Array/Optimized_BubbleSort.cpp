@@ -1,4 +1,4 @@
-//  bubble sort ques2
+//Optimized  bubble sort
 #include <iostream>
 using namespace std;
 void bubsort(int * a){
