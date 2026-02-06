@@ -1,4 +1,3 @@
-//ques1
 #include <iostream>
 
 using namespace std;
