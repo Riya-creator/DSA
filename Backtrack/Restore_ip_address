@@ -1,0 +1,31 @@
+class Solution {
+    vector<string> ans;
+
+    void solve(string &s, int idx, int parts, string curr) {
+        if (parts == 4) {
+            if (idx == s.size())
+                ans.push_back(curr.substr(0, curr.size() - 1));
+            return;
+        }
+
+        for (int len = 1; len <= 3 && idx + len <= s.size(); len++) {
+            string seg = s.substr(idx, len);
+
+            if (seg.size() > 1 && seg[0] == '0')
+                break;
+
+            int val = stoi(seg);
+
+            if (val > 255)
+                break;
+
+            solve(s, idx + len, parts + 1, curr + seg + ".");
+        }
+    }
+
+public:
+    vector<string> restoreIpAddresses(string s) {
+        solve(s, 0, 0, "");
+        return ans;
+    }
+};
