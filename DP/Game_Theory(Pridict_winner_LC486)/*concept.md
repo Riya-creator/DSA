@@ -323,6 +323,45 @@ This is the standard optimal solution used for this problem.
 
 ---
 
+## 🔍 Follow-up: Why is the answer always `true` for LeetCode 877?
+
+Although this problem is commonly solved using Dynamic Programming to learn optimal game strategies, **LeetCode 877 has a special property** that makes the answer always `true`.
+
+### Key Observation
+
+* The number of piles is **even**.
+* The total number of stones is **odd**, so a tie is impossible.
+
+If we label the piles by their indices:
+
+```text
+Index:  0   1   2   3   4   5
+        E   O   E   O   E   O
+```
+
+Alice first calculates:
+
+* Sum of all **even-indexed** piles.
+* Sum of all **odd-indexed** piles.
+
+Since the total number of stones is odd, these two sums **cannot be equal**. One of them must be larger.
+
+On her very first move, Alice can choose whether she wants to collect **all even-indexed piles** or **all odd-indexed piles**. Regardless of Bob's moves, the parity of the remaining end piles always allows Alice to continue picking from her chosen parity.
+
+Therefore, Alice simply commits to the parity with the larger total sum and is guaranteed to collect all those piles, ensuring she finishes with more stones than Bob.
+
+### Conclusion
+
+Because of this parity strategy, **Alice always wins**, making the answer for this specific problem simply:
+
+```cpp
+return true;
+```
+
+> **Note:** This shortcut works **only because of the special constraints of LeetCode 877 (even number of piles)**. The Dynamic Programming approach is still valuable to learn, as it applies to many other Stone Game variants where this observation no longer holds.
+
+---
+
 # Pattern Recognition
 
 Whenever a problem contains
