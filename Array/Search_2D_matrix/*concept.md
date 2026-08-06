@@ -231,7 +231,7 @@ If yes:
 
 ---
 
-## Pattern 5 — Graph-Like Exploration
+# Pattern 5 — Graph-Like Exploration
 
 Whenever movement is possible in multiple directions, ask:
 
