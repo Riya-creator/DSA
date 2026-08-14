@@ -71,7 +71,7 @@ class SegmentTree{
     cur->value = cur->left->value + cur->right->value;// apply the tru tree aproach 
 }
 
-//this is my appraoch but not the fundamental one
+//this is valid appraoch but not the fundamental one
     // int update(int index, int val, int l, int r, node * cur){
     //     if(l==r ){
     //         int ret =  val - cur->value;
