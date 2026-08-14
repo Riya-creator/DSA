@@ -1,0 +1,100 @@
+//no prior building of but when we need node
+#include <bits/stdc++.h>
+using namespace std;
+
+struct node{
+    node *left,*right;
+    long long value,lazy;
+
+    node(){
+        left=NULL;
+        right=NULL;
+        value=0;
+        lazy=0;
+    }
+};
+
+class SegmentTree{
+    node *root;
+    int n;
+
+    void push(node *cur,int l,int r){
+        if(cur->lazy==0 || l==r) return;
+
+        if(cur->left==NULL) cur->left=new node();
+        if(cur->right==NULL) cur->right=new node();
+
+        int mid=l+(r-l)/2;
+        long long val=cur->lazy;
+
+        cur->left->value+=val*(mid-l+1);
+        cur->right->value+=val*(r-mid);
+
+        cur->left->lazy+=val;
+        cur->right->lazy+=val;
+
+        cur->lazy=0;
+    }
+
+    void update(node *cur,int l,int r,int ql,int qr,long long val){
+        if(qr<l || ql>r) return;
+
+        if(ql<=l && r<=qr){
+            cur->value+=val*(r-l+1);
+            cur->lazy+=val;
+            return;
+        }
+
+        int mid=l+(r-l)/2;
+
+        if(cur->left==NULL) cur->left=new node();
+        if(cur->right==NULL) cur->right=new node();
+
+        push(cur,l,r);
+
+        update(cur->left,l,mid,ql,qr,val);
+        update(cur->right,mid+1,r,ql,qr,val);
+
+        cur->value=cur->left->value+cur->right->value;
+    }
+
+    long long sum(node *cur,int l,int r,int ql,int qr){
+        if(cur==NULL || qr<l || ql>r) return 0;
+
+        if(ql<=l && r<=qr)
+            return cur->value;
+
+        push(cur,l,r);
+
+        int mid=l+(r-l)/2;
+
+        return sum(cur->left,l,mid,ql,qr)
+             + sum(cur->right,mid+1,r,ql,qr);
+    }
+
+public:
+    SegmentTree(int n){
+        this->n=n;
+        root=new node();
+    }
+
+    void update(int l,int r,long long val){
+        update(root,0,n-1,l,r,val);
+    }
+
+    long long sum(int l,int r){
+        return sum(root,0,n-1,l,r);
+    }
+};
+
+int main(){
+    int n=1000000000;
+
+    SegmentTree st(n);
+
+    st.update(100,100000,5);
+    st.update(50000,200000,10);
+
+    cout<<st.sum(100,100000)<<endl;
+    cout<<st.sum(0,100)<<endl;
+}
