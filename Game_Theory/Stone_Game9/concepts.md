@@ -23,11 +23,20 @@ Imagine the running total as a live circuit. Hitting any multiple of 3 ($3, 6, 9
 
 ### The Three Token Archetypes
 
-Regardless of original magnitudes (e.g., $1, 4, 7, 100 ightarrow 	ext{Type 1}$; $2, 5, 8, 101 ightarrow 	ext{Type 2}$; $3, 6, 9, 99 ightarrow 	ext{Type 0}$):
+Regardless of original magnitudes (e.g., $1, 4, 7, 100 
+ightarrow 	ext{Type 1}$; $2, 5, 8, 101 
+ightarrow 	ext{Type 2}$; $3, 6, 9, 99 
+ightarrow 	ext{Type 0}$):
 
-* **`+1` Tokens ($1 \pmod 3$):** Advances the residue from $1 ightarrow 2$ or from $2 ightarrow 0$ (DETONATION).
-* **`+2` Tokens ($2 \pmod 3$):** Advances the residue from $2 ightarrow 1$ or from $1 ightarrow 0$ (DETONATION).
-* **`Pass` Tokens ($0 \pmod 3$):** Leaves residue unchanged ($1 ightarrow 1$ or $2 ightarrow 2$), passing the turn to the opponent.
+* **`+1` Tokens ($1 \pmod 3$):** Advances the residue from $1 
+ightarrow 2$ or from $2 
+ightarrow 0$ (DETONATION).
+* **`+2` Tokens ($2 \pmod 3$):** Advances the residue from $2 
+ightarrow 1$ or from $1 
+ightarrow 0$ (DETONATION).
+* **`Pass` Tokens ($0 \pmod 3$):** Leaves residue unchanged ($1 
+ightarrow 1$ or $2 
+ightarrow 2$), passing the turn to the opponent.
 
 ```
        Current State = 1
@@ -141,11 +150,16 @@ An odd count of `0`s gives **Bob** a strategic weapon. On Turn 2, instead of con
 * **Residues:** $c_0 = 2$ (`6, 3`), $c_1 = 3$ (`1, 4, 7`), $c_2 = 2$ (`2, 5`)
 * **Evaluation:** $c_0$ is even, $\min(c_1, c_2) = \min(3, 2) = 2 > 0 \implies$ **Alice Wins**.
 * **Winning Path:** Alice opens with `+2` (e.g. `2`).
-  * *T1 (Alice):* Plays `2` $ightarrow$ Sum = 2.
-  * *T2 (Bob):* Forced to play `+2` (plays `5`) $ightarrow$ Sum = 7 (Residue 1).
-  * *T3 (Alice):* Plays `+1` (plays `1`) $ightarrow$ Sum = 8 (Residue 2).
-  * *T4 (Bob):* No `+2`s left. Bob stalls with `+0` (plays `6`) $ightarrow$ Sum = 14 (Residue 2).
-  * *T5 (Alice):* Alice neutralizes with `+0` (plays `3`) $ightarrow$ Sum = 17 (Residue 2).
+  * *T1 (Alice):* Plays `2` $
+ightarrow$ Sum = 2.
+  * *T2 (Bob):* Forced to play `+2` (plays `5`) $
+ightarrow$ Sum = 7 (Residue 1).
+  * *T3 (Alice):* Plays `+1` (plays `1`) $
+ightarrow$ Sum = 8 (Residue 2).
+  * *T4 (Bob):* No `+2`s left. Bob stalls with `+0` (plays `6`) $
+ightarrow$ Sum = 14 (Residue 2).
+  * *T5 (Alice):* Alice neutralizes with `+0` (plays `3`) $
+ightarrow$ Sum = 17 (Residue 2).
   * *T6 (Bob):* Bob holds only `[4, 7]` (both `+1`s). Any move gives sum $17+4=21 \equiv 0$. **Bob explodes.**
 
 ### Scenario B: Odd-Zero Insufficient Surplus (The Default Trap)
@@ -154,10 +168,14 @@ An odd count of `0`s gives **Bob** a strategic weapon. On Turn 2, instead of con
 * **Evaluation:** $c_0$ is odd, $|c_1 - c_2| = |2 - 1| = 1 \le 2 \implies$ **Bob Wins**.
 * **Trace:**
   * Alice opens with `1` (Sum = 1).
-  * Bob drops the `3` (`Pass`) $ightarrow$ Sum remains 4 (Residue 1), but Alice must move.
-  * Alice is forced to play her last `+1` (`4`) $ightarrow$ Sum = 8 (Residue 2).
-  * Bob plays `2` $ightarrow$ Sum = 10 (Residue 1).
-  * All stones are gone without explosion $ightarrow$ **Bob wins by rule**.
+  * Bob drops the `3` (`Pass`) $
+ightarrow$ Sum remains 4 (Residue 1), but Alice must move.
+  * Alice is forced to play her last `+1` (`4`) $
+ightarrow$ Sum = 8 (Residue 2).
+  * Bob plays `2` $
+ightarrow$ Sum = 10 (Residue 1).
+  * All stones are gone without explosion $
+ightarrow$ **Bob wins by rule**.
 
 ### Scenario C: Odd-Zero Overwhelming Surplus
 * **Set:** $[3, 1, 4, 7, 10, 2]$
@@ -169,7 +187,8 @@ An odd count of `0`s gives **Bob** a strategic weapon. On Turn 2, instead of con
   * Alice plays `4` (Sum = 8, Residue 2).
   * Bob plays `2` (Sum = 10, Residue 1).
   * Alice plays `7` (Sum = 17, Residue 2).
-  * Bob has no `+2`s left. Bob must play `10` $ightarrow$ Sum = 27 (Residue 0). **Bob explodes.**
+  * Bob has no `+2`s left. Bob must play `10` $
+ightarrow$ Sum = 27 (Residue 0). **Bob explodes.**
 
 ---
 
