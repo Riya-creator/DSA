@@ -1,4 +1,5 @@
 class Solution {
+//time n space: O(n)
 public:
     bool parseBoolExpr(string expression) {
         stack<char> st;
