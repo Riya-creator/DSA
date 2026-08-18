@@ -626,8 +626,3 @@ Once that is correct:
 That thought process is reusable far beyond this one LeetCode problem.
 
 When a DP problem feels confusing, pause and define the state in plain English first. If you can explain exactly what `DP[l][r]` means without mentioning how you arrived there, you're usually on the right track.
-"""
-
-path = "/mnt/data/LeetCode_1563_Stone_Game_V_DP_Concepts_README.md"
-pypandoc.convert_text(content, 'md', format='md', outputfile=path, extra_args=['--standalone'])
-print(path)
