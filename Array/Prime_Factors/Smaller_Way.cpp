@@ -7,7 +7,7 @@ void PrimeFactors(unordered_map<int,int>& prime, int nums, bool remove) {
                     if(prime[i] == 0) prime.erase(i);
                 }
 
-                while(nums % i == 0)
+                while(nums % i == 0)//covering all its factors
                     nums /= i;
             }
         }
